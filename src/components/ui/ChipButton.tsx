@@ -18,7 +18,7 @@ export function ChipButton({
     <button
       type={type}
       onClick={onClick}
-      className={`rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300 hover:bg-white/10 ${className}`}
+      className={`rounded-full bg-white/5 px-3 py-1 text-sm text-slate-300 hover:bg-white/10 ${className}`}
     >
       {children}
     </button>

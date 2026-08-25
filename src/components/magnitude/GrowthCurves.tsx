@@ -1,4 +1,4 @@
-import { ENERGY_EXPONENT, formatRatio } from "@/lib/magnitude";
+import { ENERGY_EXPONENT, formatLogDecadeTick } from "@/lib/magnitude";
 import { COLOR_A, COLOR_B } from "@/lib/palette";
 import { copy } from "@/content/copy";
 import { SectionLabel } from "@/components/ui/SectionLabel";
@@ -11,7 +11,7 @@ export type GrowthCurvesProps = {
 
 const W = 640;
 const H = 220;
-const PAD = { l: 52, r: 18, t: 18, b: 40 } as const;
+const PAD = { l: 56, r: 18, t: 18, b: 40 } as const;
 const SAMPLES = 64;
 
 /** Amp vs energy as straight lines on log(B/A) vs ΔM — the site’s core lesson. */
@@ -19,7 +19,8 @@ export function GrowthCurves({ delta, className = "" }: GrowthCurvesProps) {
   const span = Math.max(2, Math.abs(delta) + 0.5);
   const xMin = -span;
   const xMax = span;
-  const yMax = Math.max(ENERGY_EXPONENT * span, 1.5);
+  // Pad to whole decades so the Y axis is a clean functional log scale.
+  const yMax = Math.max(Math.ceil(ENERGY_EXPONENT * span), 2);
   const yMin = -yMax;
 
   const plotW = W - PAD.l - PAD.r;
@@ -54,13 +55,11 @@ export function GrowthCurves({ delta, className = "" }: GrowthCurvesProps) {
   if (!xTicks.includes(0)) xTicks.push(0);
   xTicks.sort((a, b) => a - b);
 
+  // One tick per decade of B/A (log₁₀) — same idea as LogBars.
   const yTickLogs: number[] = [];
-  const yStep = yMax <= 3 ? 1 : 2;
-  for (let t = Math.ceil(yMin); t <= Math.floor(yMax); t += yStep) {
+  for (let t = yMin; t <= yMax; t += 1) {
     yTickLogs.push(t);
   }
-  if (!yTickLogs.includes(0)) yTickLogs.push(0);
-  yTickLogs.sort((a, b) => a - b);
 
   const deltaLabel =
     delta === 0 ? "0" : `${delta > 0 ? "+" : ""}${delta.toFixed(1)}`;
@@ -166,7 +165,7 @@ export function GrowthCurves({ delta, className = "" }: GrowthCurvesProps) {
             fontSize="10"
             fontFamily="ui-monospace, monospace"
           >
-            {formatRatio(10 ** t)}
+            {formatLogDecadeTick(t)}
           </text>
         ))}
         <text

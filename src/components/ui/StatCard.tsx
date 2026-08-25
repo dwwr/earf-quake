@@ -28,7 +28,7 @@ export function StatCard({
         className={`rounded-xl border border-white/10 bg-black/40 px-4 py-4 ${className}`}
       >
         <p
-          className="text-xs font-medium tracking-wide uppercase"
+          className="text-sm font-semibold tracking-wide uppercase"
           style={color ? { color } : undefined}
         >
           {label}
@@ -50,12 +50,12 @@ export function StatCard({
       <div
         className={`rounded-xl border border-white/10 bg-[#0b1020] px-4 py-3 ${className}`}
       >
-        <p className="text-[11px] tracking-wide text-slate-500 uppercase">
+        <p className="text-[11px] font-semibold tracking-wide text-slate-500 uppercase">
           {label}
         </p>
         <p className="mt-1 font-mono text-sm text-amber-200">{value}</p>
         {hint ? (
-          <p className="mt-2 text-xs leading-5 text-slate-400">{hint}</p>
+          <p className="mt-2 text-sm leading-5 text-slate-400">{hint}</p>
         ) : null}
       </div>
     );
@@ -65,7 +65,7 @@ export function StatCard({
     <div
       className={`rounded-xl border border-white/10 bg-black/30 px-3 py-2 ${className}`}
     >
-      <p className="text-[11px] tracking-wide text-slate-500 uppercase">
+      <p className="text-[11px] font-semibold tracking-wide text-slate-500 uppercase">
         {label}
       </p>
       <p className="mt-1 font-mono text-sm text-slate-100">{value}</p>

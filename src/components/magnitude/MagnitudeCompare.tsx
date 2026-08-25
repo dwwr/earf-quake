@@ -49,10 +49,8 @@ export function MagnitudeCompare({
   return (
     <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0b1020]">
       <div className="border-b border-white/10 px-4 py-3 sm:px-5">
-        <p className="text-sm font-semibold text-white">
-          {copy.compare.title}
-        </p>
-        <p className="mt-1 text-xs leading-5 text-slate-400">
+        <p className="text-lg font-semibold text-white">{copy.compare.title}</p>
+        <p className="mt-1 text-sm leading-5 text-slate-400">
           {copy.compare.subtitle}
         </p>
       </div>
@@ -114,9 +112,7 @@ export function MagnitudeCompare({
               />
             </div>
             <p className="font-mono text-sm text-slate-400">
-              <span className="text-slate-500">
-                {copy.compare.stats.delta}
-              </span>
+              <span className="text-slate-500">{copy.compare.stats.delta}</span>
               <span className="mx-2 text-slate-600">·</span>
               <span className="text-slate-200">
                 {cmp.delta === 0
@@ -130,7 +126,6 @@ export function MagnitudeCompare({
             ampRatio={cmp.amplitudeRatio}
             energyRatio={cmp.energyRatio}
           />
-          <GrowthCurves delta={cmp.delta} />
           <EnergyTiles ratio={cmp.energyRatio} />
 
           <div>
@@ -176,7 +171,9 @@ export function MagnitudeCompare({
             </p>
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-xs leading-5 text-slate-400">
+          <GrowthCurves delta={cmp.delta} />
+
+          <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-sm leading-5 text-slate-400">
             <p className="font-medium text-slate-200">
               {copy.compare.limitationsTitle}
             </p>

@@ -92,6 +92,16 @@ export function formatRatio(value: number): string {
   return `${x.toFixed(2)}×`;
 }
 
+/**
+ * Axis tick for a log₁₀ decade (…, −2, −1, 0, 1, 2, …) → 10ⁿ× / 1×.
+ * Keeps growth / log charts on a uniform functional scale.
+ */
+export function formatLogDecadeTick(decade: number): string {
+  const n = Math.round(decade);
+  if (n === 0) return "1×";
+  return `10${sup(n)}×`;
+}
+
 export function formatSci(value: number, unit: string): string {
   if (value === 0) return `0 ${unit}`;
   const exp = Math.floor(Math.log10(Math.abs(value)));

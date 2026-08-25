@@ -9,7 +9,7 @@ export type SectionLabelProps = {
 export function SectionLabel({ children, className = "" }: SectionLabelProps) {
   return (
     <p
-      className={`text-xs tracking-wide text-slate-400 uppercase ${className}`}
+      className={`text-sm font-bold tracking-wide text-slate-400 uppercase ${className}`}
     >
       {children}
     </p>

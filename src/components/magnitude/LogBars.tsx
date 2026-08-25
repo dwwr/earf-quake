@@ -1,4 +1,4 @@
-import { formatRatio } from "@/lib/magnitude";
+import { formatLogDecadeTick, formatRatio } from "@/lib/magnitude";
 import { COLOR_A, COLOR_B } from "@/lib/palette";
 import { copy } from "@/content/copy";
 import { SectionLabel } from "@/components/ui/SectionLabel";
@@ -81,7 +81,7 @@ export function LogBars({
             className="absolute -translate-x-1/2"
             style={{ left: `${logRatioToPct(d)}%` }}
           >
-            {formatRatio(10 ** d)}
+            {formatLogDecadeTick(d)}
           </span>
         ))}
       </div>

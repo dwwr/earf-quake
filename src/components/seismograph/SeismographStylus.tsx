@@ -10,6 +10,7 @@ import {
 } from "react";
 import type { SeismographStylusProps } from "./types";
 import { COLOR_A, COLOR_B } from "@/lib/palette";
+import { copy } from "@/content/copy";
 
 export type {
   SeismographChannelAmps,
@@ -20,6 +21,21 @@ export { relativeAmpsFromDelta, relativeAmpsFromMags } from "./types";
 const WIDTH = 640;
 const HEIGHT = 200;
 const CHANNEL_H = 100;
+/** Left gutter for the rotated Y-axis label + amp ticks. */
+const PAD_L = 36;
+/** Same half-height used by ampAt — amp = 1 fills this. */
+const AMP_HALF = (CHANNEL_H / 2) * 0.9;
+const AMP_TICKS = [1, 0, -1] as const;
+
+function channelAmpY(channelTop: number, ampUnit: number): number {
+  const mid = channelTop + CHANNEL_H / 2;
+  return mid - ampUnit * AMP_HALF;
+}
+
+function formatAmpTick(ampUnit: number): string {
+  if (ampUnit === 0) return "0";
+  return ampUnit > 0 ? `+${ampUnit}` : `${ampUnit}`;
+}
 const CYCLE_MS = 5400;
 const DRAW_FRAC = 0.5;
 const RICKER_F0 = 1.05;
@@ -122,8 +138,7 @@ function ampAt(
   jagged: boolean,
 ): number {
   const mid = channelTop + CHANNEL_H / 2;
-  const half = (CHANNEL_H / 2) * 0.9;
-  const y = mid - signalAt(x / WIDTH, amp, seed, jagged) * half;
+  const y = mid - signalAt(x / WIDTH, amp, seed, jagged) * AMP_HALF;
   return Math.min(channelTop + CHANNEL_H - 4, Math.max(channelTop + 4, y));
 }
 
@@ -266,7 +281,7 @@ export function SeismographStylus({
 
         <svg
           key={`${magA}-${magB}-${ampA}-${ampB}-${jagged}`}
-          viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+          viewBox={`${-PAD_L} 0 ${WIDTH + PAD_L} ${HEIGHT}`}
           className={`relative z-[1] w-full ${embedded ? "h-40" : "h-48"}`}
           role="img"
           aria-label={ariaLabel}
@@ -292,7 +307,7 @@ export function SeismographStylus({
             </filter>
           </defs>
 
-          <rect x="0" y="0" width={WIDTH} height={HEIGHT} fill={PANEL} />
+          <rect x={-PAD_L} y="0" width={WIDTH + PAD_L} height={HEIGHT} fill={PANEL} />
           <path d={grid} fill="none" stroke="#1e293b" strokeWidth="0.7" />
           <line
             x1="0"
@@ -303,6 +318,42 @@ export function SeismographStylus({
             strokeWidth="1.5"
             strokeDasharray="4 3"
           />
+          {/* Per-channel zero baselines */}
+          <line
+            x1="0"
+            x2={WIDTH}
+            y1={channelAmpY(0, 0)}
+            y2={channelAmpY(0, 0)}
+            stroke="#1e293b"
+            strokeWidth="0.75"
+            strokeDasharray="2 3"
+            opacity="0.7"
+          />
+          <line
+            x1="0"
+            x2={WIDTH}
+            y1={channelAmpY(CHANNEL_H, 0)}
+            y2={channelAmpY(CHANNEL_H, 0)}
+            stroke="#1e293b"
+            strokeWidth="0.75"
+            strokeDasharray="2 3"
+            opacity="0.7"
+          />
+          {/* ±1 functional guides (same scale as waveform amp) */}
+          {([0, CHANNEL_H] as const).map((top) =>
+            AMP_TICKS.filter((t) => t !== 0).map((ampUnit) => (
+              <line
+                key={`amp-${top}-${ampUnit}`}
+                x1="0"
+                x2={WIDTH}
+                y1={channelAmpY(top, ampUnit)}
+                y2={channelAmpY(top, ampUnit)}
+                stroke="#1e293b"
+                strokeWidth="0.5"
+                opacity="0.45"
+              />
+            )),
+          )}
 
           <g clipPath={`url(#${clipId})`}>
             <polyline
@@ -385,7 +436,46 @@ export function SeismographStylus({
           )}
 
           <text
-            x="10"
+            x={-18}
+            y={HEIGHT / 2}
+            textAnchor="middle"
+            fill="#475569"
+            fontSize="10"
+            fontFamily="ui-monospace, monospace"
+            transform={`rotate(-90 ${-18} ${HEIGHT / 2})`}
+          >
+            {copy.compare.traceY}
+          </text>
+          {([0, CHANNEL_H] as const).map((top) =>
+            AMP_TICKS.map((ampUnit) => {
+              const y = channelAmpY(top, ampUnit);
+              return (
+                <g key={`tick-${top}-${ampUnit}`}>
+                  <line
+                    x1={-2}
+                    x2={6}
+                    y1={y}
+                    y2={y}
+                    stroke="#64748b"
+                    strokeWidth="1"
+                  />
+                  <text
+                    x={-6}
+                    y={y + 3}
+                    textAnchor="end"
+                    fill="#64748b"
+                    fontSize="9"
+                    fontFamily="ui-monospace, monospace"
+                  >
+                    {formatAmpTick(ampUnit)}
+                  </text>
+                </g>
+              );
+            }),
+          )}
+
+          <text
+            x="28"
             y="16"
             fill={VFD_CYAN}
             fontSize="11"
@@ -395,7 +485,7 @@ export function SeismographStylus({
             {`CH-A  M${magA.toFixed(1)}`}
           </text>
           <text
-            x="10"
+            x="28"
             y={CHANNEL_H + 16}
             fill={VFD_AMBER}
             fontSize="11"
