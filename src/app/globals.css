@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  --background: #070b16;
+  --foreground: #e8eefc;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #070b16;
+    --foreground: #e8eefc;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mag-input {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.mag-input::-webkit-inner-spin-button,
+.mag-input::-webkit-outer-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trace-curtain,
+  .trace-playhead {
+    display: none;
+  }
+}

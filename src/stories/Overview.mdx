@@ -1,0 +1,23 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Overview" />
+
+# Magnitude compare
+
+**earf-quake** is a calculator for two earthquake magnitudes. It is not a wave-equation solver.
+
+## What it computes
+
+- **Amplitude** `A ∝ 10^M` — original Richter local magnitude ML, same station and instrument. Each +1 is **10×** amplitude.
+- **Radiated energy** `log10(Es) = 1.5M + 4.4` (Kanamori 1977). Each +1 is **~31.6×** energy.
+- **Seismic moment** via Hanks & Kanamori, treating the input as Mw.
+- **TNT equivalent** as an order-of-magnitude metaphor only.
+
+## Visuals
+
+- Dual Ricker traces at the same station: the larger event fills the plot; the smaller is scaled by `10^(−ΔM)`.
+- Shared log-axis bars so energy visibly outruns amplitude.
+
+## Limitations
+
+ML saturates above ~6.5 (energy and moment treat the number as Mw). Amplitude ratios assume the same distance and instrument. MMI is not magnitude. Es is radiated seismic energy, not total strain energy. TNT is not a blast yield.
