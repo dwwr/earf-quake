@@ -6,8 +6,13 @@ const config: StorybookConfig = {
   addons: ["@storybook/addon-docs"],
   framework: "@storybook/nextjs-vite",
   staticDirs: ["../public"],
-  async viteFinal(config) {
+  // Production static files are copied to public/storybook and served at /storybook/.
+  // Dev server ignores Vite base and listens at / — Next proxies /storybook → :6006/.
+  async viteFinal(config, { configType }) {
     config.plugins = [...(config.plugins ?? []), tailwindcss()];
+    if (configType === "PRODUCTION") {
+      config.base = "/storybook/";
+    }
     return config;
   },
 };
