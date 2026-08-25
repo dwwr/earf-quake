@@ -14,7 +14,7 @@ export const copy = {
 
   home: {
     title: "Compare Two Magnitudes.",
-    lead: "A jump of one on the Richter scale is 10× the ground-motion amplitude and about 32× the radiated energy. This calculator helps you see both.",
+    lead: "A jump of one on the Richter scale is 10× the ground-motion amplitude and about 32× the radiated energy. This calculator helps visualize the big difference between two magnitudes.",
     mathHeading: "The Math",
     mathLead:
       "Magnitude is a logarithm of size. Amplitude and energy use different slopes on that log, which is why +1 looks modest on a seismogram and enormous in joules.",
@@ -62,8 +62,8 @@ export const copy = {
     title: "Magnitude Comparison",
     subtitle:
       "Richter-style amplitude is 10× per unit. Radiated energy is ~32× per unit. Those are different logarithms.",
-    eventA: "Event A",
-    eventB: "Event B",
+    eventA: "Quake A",
+    eventB: "Quake B",
     swap: "Swap A ↔ B",
     presets: [
       { label: "ΔM = 1", a: 5, b: 6 },
@@ -78,7 +78,7 @@ export const copy = {
       energy: "Energy B/A",
       energyHint: "10^(1.5 ΔM) · radiated Es",
       ratiosLead: "How much bigger is B than A?",
-      aboutB: "Event B alone (not a ratio)",
+      aboutB: "Quake B alone (not a ratio)",
       energyOfB: "Radiated energy Es",
       tnt: "TNT equivalent (order of magnitude)",
       moment: "Seismic moment M₀",
@@ -87,7 +87,7 @@ export const copy = {
     logAmp: "Amplitude  10^ΔM",
     logEnergy: "Energy  10^(1.5 ΔM)",
     logOverflow: "off scale",
-    tiles: "How many A events match one B in energy",
+    tiles: "How many A quakes match one B in energy",
     tilesCapped: "  (tiles capped at 64)",
     growthHeading: "Two slopes vs ΔM",
     growthAmp: "Amplitude  10^ΔM",
