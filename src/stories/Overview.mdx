@@ -13,10 +13,23 @@ import { Meta } from "@storybook/addon-docs/blocks";
 - **Seismic moment** via Hanks & Kanamori, treating the input as Mw.
 - **TNT equivalent** as an order-of-magnitude metaphor only.
 
+## Storybook map
+
+| Group | Stories |
+| --- | --- |
+| **Magnitude/Compare** | Full calculator |
+| **Magnitude/MagField** | Magnitude text + slider |
+| **Magnitude/LogBars** | Shared log scale amp vs energy |
+| **Magnitude/GrowthCurves** | Two slopes vs ΔM |
+| **Magnitude/EnergyTiles** | How many A events match one B |
+| **Seismograph/Stylus** | Dual-channel VFD traces + needles |
+| **UI/** | StatCard, ChipButton, SectionLabel |
+
 ## Visuals
 
 - Dual Ricker traces at the same station: the larger event fills the plot; the smaller is scaled by `10^(−ΔM)`.
-- Shared log-axis bars so energy visibly outruns amplitude.
+- Shared log-axis bars (1× at center) so energy visibly outruns amplitude.
+- Growth curves: amplitude slope 1 vs energy slope 1.5 on log(B/A) vs ΔM.
 
 ## Limitations
 

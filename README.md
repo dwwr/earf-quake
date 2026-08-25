@@ -2,27 +2,27 @@
 
 A calculator that compares two earthquake magnitudes. A jump of **one** on the scale is **10×** ground-motion amplitude and about **32×** radiated energy. Those are different logarithms; the UI makes both visible.
 
-The homepage is the calculator. Storybook isolates the same component.
-
 ## Run
 
 ```bash
 npm install
 npm run dev          # http://localhost:3000
-npm run storybook    # http://localhost:6006
+npm run storybook    # Storybook at http://localhost:6006/storybook/
 ```
+
+The homepage **Open Storybook** link goes to `/storybook/`. In development that rewrites to the Storybook server (run `npm run storybook` alongside `npm run dev`). Production builds embed a static Storybook under `public/storybook` via `prebuild`.
 
 Magnitudes are **0–10**, one decimal. Presets cover ΔM = 1, M5 vs M7, Northridge vs Loma Prieta, and M7 vs M9.
 
 ## What it computes
 
-| Quantity | Rule |
-| --- | --- |
+| Quantity            | Rule                                                   |
+| ------------------- | ------------------------------------------------------ |
 | Amplitude ratio B/A | `10^(B − A)` — Richter ML, same station and instrument |
-| Energy ratio B/A | `10^(1.5 (B − A))` ≈ **31.6×** per unit |
-| Radiated energy Es | `log10(Es) = 1.5M + 4.4` joules (Kanamori 1977) |
-| Seismic moment | Hanks & Kanamori, treating the input as Mw |
-| TNT equivalent | order-of-magnitude metaphor only (`4.184×10^9` J/t) |
+| Energy ratio B/A    | `10^(1.5 (B − A))` ≈ **31.6×** per unit                |
+| Radiated energy Es  | `log10(Es) = 1.5M + 4.4` joules (Kanamori 1977)        |
+| Seismic moment      | Hanks & Kanamori, treating the input as Mw             |
+| TNT equivalent      | order-of-magnitude metaphor only (`4.184×10^9` J/t)    |
 
 ## Visuals
 
@@ -42,4 +42,18 @@ Magnitudes are **0–10**, one decimal. Presets cover ΔM = 1, M5 vs M7, Northri
 - Storybook 10 (`@storybook/nextjs-vite`)
 - SVG for the scaled waveforms
 
-Physics lives in `src/lib/magnitude.ts`. The UI is `src/components/magnitude/MagnitudeCompare.tsx`.
+Physics lives in `src/lib/magnitude.ts`. The UI is `src/components/magnitude/MagnitudeCompare.tsx`. App strings live in `src/content/copy.ts`.
+
+## Launch
+
+Deploy to Vercel from `dwwr/earf-quake`. Copy `.env.example` → Vercel env (and `.env.local` for local):
+
+| Variable                       | Purpose                                                       |
+| ------------------------------ | ------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`         | Production origin (canonical / OG / sitemap)                  |
+| `NEXT_PUBLIC_ADSENSE_CLIENT`   | `ca-pub-…` after AdSense approval; enables script + `ads.txt` |
+| `NEXT_PUBLIC_ADSENSE_SLOT`     | Optional display unit id; leave empty for Auto ads only       |
+| `NEXT_PUBLIC_GA_ID`            | Optional GA4 `G-…`                                            |
+| `NEXT_PUBLIC_GSC_VERIFICATION` | Optional Search Console HTML-tag token                        |
+
+Set the client, turn on Auto ads in the AdSense UI, and (optionally) add a manual slot for the home-page `AdSlot`. Domain DNS is account-side after the site is live.
