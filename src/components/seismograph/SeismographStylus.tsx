@@ -12,10 +12,7 @@ import type { SeismographStylusProps } from "./types";
 import { COLOR_A, COLOR_B } from "@/lib/palette";
 import { copy } from "@/content/copy";
 
-export type {
-  SeismographChannelAmps,
-  SeismographStylusProps,
-} from "./types";
+export type { SeismographChannelAmps, SeismographStylusProps } from "./types";
 export { relativeAmpsFromDelta, relativeAmpsFromMags } from "./types";
 
 const WIDTH = 640;
@@ -194,7 +191,8 @@ export function SeismographStylus({
   embedded = false,
   jagged = false,
   className = "",
-  "aria-label": ariaLabel = "Seismograph stylus traces scaled by amplitude ratio",
+  "aria-label":
+    ariaLabel = "Seismograph stylus traces scaled by amplitude ratio",
 }: SeismographStylusProps) {
   const clipId = useId().replace(/:/g, "");
   const glowA = useId().replace(/:/g, "");
@@ -307,7 +305,13 @@ export function SeismographStylus({
             </filter>
           </defs>
 
-          <rect x={-PAD_L} y="0" width={WIDTH + PAD_L} height={HEIGHT} fill={PANEL} />
+          <rect
+            x={-PAD_L}
+            y="0"
+            width={WIDTH + PAD_L}
+            height={HEIGHT}
+            fill={PANEL}
+          />
           <path d={grid} fill="none" stroke="#1e293b" strokeWidth="0.7" />
           <line
             x1="0"
@@ -503,7 +507,7 @@ export function SeismographStylus({
                 ? "JAGS ON PULSE CORE · QUIET FLANKS"
                 : "SMOOTH RICKER · QUIET FLANKS"}
             </span>
-            <span className="text-amber-300/70">earf-quake // stylus</span>
+            <span className="text-amber-300/70">stylus</span>
           </div>
         )}
       </div>
