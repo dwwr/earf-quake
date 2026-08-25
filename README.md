@@ -26,7 +26,7 @@ Magnitudes are **0–10**, one decimal. Presets cover ΔM = 1, M5 vs M7, Northri
 
 ## Visuals
 
-- Dual Ricker traces at the same station: the larger event fills the plot; the smaller is scaled by `10^(−ΔM)`.
+- Dual Ricker traces at the same station- ie, the larger event fills the plot; the smaller is scaled by `10^(−ΔM)`.
 - Shared log-axis bars so energy visibly outruns amplitude.
 - Energy tiles: how many A events match one B. After a swap, the ratio inverts.
 
