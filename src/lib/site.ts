@@ -56,3 +56,9 @@ export function getGscVerification(): string | undefined {
   const value = process.env.NEXT_PUBLIC_GSC_VERIFICATION?.trim();
   return value || undefined;
 }
+
+/** Optional public contact email for /contact. */
+export function getContactEmail(): string | undefined {
+  const value = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim();
+  return value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? value : undefined;
+}
