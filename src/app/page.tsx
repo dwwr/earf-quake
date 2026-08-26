@@ -1,28 +1,27 @@
 import type { Metadata } from "next";
 import { MagnitudeCompare } from "@/components/magnitude/MagnitudeCompare";
 import { AdSlot } from "@/components/AdSlot";
+import { SiteHeader } from "@/components/SiteHeader";
 import { StatCard } from "@/components/ui/StatCard";
 import { copy } from "@/content/copy";
 
 export const metadata: Metadata = {
-  title: copy.meta.title,
+  title: {
+    absolute: copy.meta.title,
+  },
   description: copy.meta.description,
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: copy.meta.title,
+    description: copy.meta.description,
+    url: "/",
+  },
 };
 
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col bg-[#070b16] text-slate-100">
-      <header className="mx-auto flex w-full max-w-4xl items-center justify-between px-6 py-5">
-        <p className="font-mono text-sm tracking-tight text-amber-300">
-          {copy.brand}
-        </p>
-        <a
-          href={copy.storybookHref}
-          className="rounded-full bg-amber-300 px-4 py-2 text-sm font-medium text-slate-950 hover:bg-amber-200"
-        >
-          {copy.storybookCta}
-        </a>
-      </header>
+      <SiteHeader />
 
       <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col gap-10 px-6 pb-16">
         <section>

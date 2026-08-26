@@ -52,10 +52,130 @@ export const copy = {
     note: "Educational estimates",
     github: "GitHub",
     refs: ["Kanamori 1977", "Hanks & Kanamori 1979"] as const,
+    legalAria: "About and legal",
+    legalNav: [
+      { href: "/about", label: "About" },
+      { href: "/privacy", label: "Privacy" },
+      { href: "/contact", label: "Contact" },
+    ] as const,
   },
 
   ads: {
     label: "Advertisement",
+  },
+
+  about: {
+    metaTitle: "About",
+    metaDescription:
+      "What Quake Compare is, where the formulas come from, and how the site stays up.",
+    title: "About Quake Compare",
+    lede: "A small calculator that shows why amplitude and radiated energy scale differently when magnitude goes up by one.",
+    sections: [
+      {
+        id: "what",
+        heading: "What this is",
+        paragraphs: [
+          "Quake Compare lets you pick two magnitudes and see the amplitude ratio (10^ΔM), the radiated-energy ratio (~32× per unit), synthetic traces at the same station, and order-of-magnitude energy and moment for the larger event.",
+          "It is an educational tool, not a seismic network product, and not a substitute for USGS or other official earthquake information.",
+        ],
+      },
+      {
+        id: "sources",
+        heading: "Where the numbers come from",
+        paragraphs: [
+          "Amplitude ratios follow Richter local magnitude (ML) for the same station and instrument. Radiated energy Es uses Kanamori (1977): log₁₀(Es) = 1.5M + 4.4 (joules). Seismic moment uses Hanks & Kanamori, treating the input as moment magnitude Mw. TNT is only an order-of-magnitude metaphor.",
+          "Original ML saturates above roughly M 6.5. Felt intensity (MMI) is not magnitude. See the limitations on the homepage for the rest of the caveats.",
+        ],
+      },
+      {
+        id: "ads",
+        heading: "How the site stays up",
+        paragraphs: [
+          "Once Google approves a publisher account, labeled display ads may appear on the calculator page. See Privacy for cookies and opt-outs.",
+        ],
+      },
+    ],
+  },
+
+  privacy: {
+    metaTitle: "Privacy",
+    metaDescription:
+      "What Quake Compare logs, how Google ads and analytics work, and how to opt out of personalized ads.",
+    title: "Privacy policy",
+    lede: "This site has no accounts and does not ask for personal details. Hosting and optional Google products may still see that you visited.",
+    sections: [
+      {
+        id: "collect",
+        heading: "What we collect",
+        paragraphs: [
+          "There is no login, mailing list, or server-side profile. Magnitude choices live only in your browser session.",
+          "The host (Vercel) and ordinary HTTP requests produce technical logs — IP address, user agent, pages requested — used to run and debug the site. We do not sell those logs.",
+        ],
+      },
+      {
+        id: "ads",
+        heading: "Advertising (Google AdSense)",
+        paragraphs: [
+          "When ads are enabled, Google AdSense may use cookies and similar technology to show ads, measure them, and (unless you opt out) personalize them.",
+          "Opt out of personalized Google ads at adssettings.google.com. California residents can also use the opt-out Google shows under US state regulations in AdSense Privacy & messaging. We do not sell personal information for money. Personalized advertising can still count as a “sale” or “sharing” under CCPA/CPRA; the Google controls are how you say no.",
+        ],
+      },
+      {
+        id: "analytics",
+        heading: "Analytics",
+        paragraphs: [
+          "If Google Analytics is configured, Google may collect usage data (pages viewed, approximate location, device) under Google’s privacy policy. We use it to see whether anyone is using the calculator, not to identify you.",
+        ],
+      },
+      {
+        id: "cookies",
+        heading: "Cookies",
+        paragraphs: [
+          "This site does not set first-party tracking cookies. Google may set cookies for ads or analytics when those products are on. You can block cookies in your browser; ads may still show, just less tailored.",
+        ],
+      },
+      {
+        id: "children",
+        heading: "Children",
+        paragraphs: [
+          "This site is a general educational calculator. It is not directed at children under 13.",
+        ],
+      },
+      {
+        id: "changes",
+        heading: "Changes",
+        paragraphs: [
+          "If this policy changes, the date on this page will change. Last updated August 2026.",
+        ],
+      },
+    ],
+    contactBefore: "Questions about privacy: ",
+    contactLink: "Contact",
+    contactAfter: ".",
+  },
+
+  contact: {
+    metaTitle: "Contact",
+    metaDescription:
+      "Corrections and questions about Quake Compare. Not a place for seismic emergency advice.",
+    title: "Contact",
+    lede: "Corrections to formulas, citations, or copy are welcome. This inbox cannot answer what to do during an earthquake — use official emergency channels.",
+    sections: [
+      {
+        id: "reach",
+        heading: "How to reach the author",
+        paragraphs: [
+          "If a number looks wrong, a reference moved, or the UI misstates the physics, say so. For live earthquake data and alerts, use USGS and your local emergency services.",
+        ],
+      },
+    ],
+    emailLineBefore: "Email ",
+    emailLineAfter:
+      ". Do not send anything you would not put on a postcard.",
+    noEmailBefore: "No public email is configured yet. Open an issue on ",
+    githubBefore: "You can also open an issue on ",
+    githubLinkLabel: "GitHub",
+    afterLink: ".",
   },
 
   compare: {
