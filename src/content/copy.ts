@@ -10,6 +10,8 @@ export const copy = {
     title: "Quake Compare",
     description:
       "Compare two earthquake magnitudes: amplitude, radiated energy, and seismic moment.",
+    ogAlt:
+      "Quake Compare — amplitude scales 10× per magnitude unit; energy about 32×",
   },
 
   home: {
