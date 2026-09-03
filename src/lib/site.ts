@@ -33,7 +33,7 @@ export function absoluteUrl(path: string): string {
 const ADSENSE_CLIENT = /^ca-pub-\d+$/;
 const GA_ID = /^(G|GT|GTM|AW)-[A-Z0-9]+$/i;
 
-/** Google AdSense publisher id (`ca-pub-…`). Empty until approved. */
+/** Google AdSense publisher id (`ca-pub-…`). Empty until set in env. */
 export function getAdsenseClient(): string | undefined {
   const value = process.env.NEXT_PUBLIC_ADSENSE_CLIENT?.trim();
   return value && ADSENSE_CLIENT.test(value) ? value : undefined;
