@@ -13,7 +13,7 @@
     "build-storybook": "rm -rf public/storybook storybook-static && storybook build -o storybook-static && mkdir -p public && cp -R storybook-static public/storybook"
   },
   "dependencies": {
-    "next": "16.3.2",
+    "next": "16.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
